@@ -1,0 +1,53 @@
+{
+  "manifest_version": "0.3",
+  "name": "rblx-mcp",
+  "display_name": "Roblox Studio Bridge",
+  "version": "0.1.0",
+  "description": "Controla o Roblox Studio pela IA: cria Parts e Scripts, lê propriedades e o Output.",
+  "long_description": "Bridge entre assistentes de IA e o Roblox Studio. A IA lista Studios conectados, cria Parts/Scripts, altera propriedades e lê erros de runtime direto do Output — tudo por MCP. Requer o bridge no ar e um token de sessão (crie com `rblx-mcp session`).",
+  "author": {
+    "name": "Rblx MCP"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "server/proxy.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/proxy.js"],
+      "env": {
+        "RBLX_BRIDGE_URL": "${user_config.bridge_url}",
+        "RBLX_MCP_TOKEN": "${user_config.token}"
+      }
+    }
+  },
+  "tools": [
+    { "name": "list_sessions", "description": "Lista Studios conectados" },
+    { "name": "create_part", "description": "Cria uma Part no Workspace" },
+    { "name": "create_script", "description": "Cria Script/LocalScript/ModuleScript" },
+    { "name": "get_output_logs", "description": "Lê o Output do Studio" }
+  ],
+  "tools_generated": true,
+  "keywords": ["roblox", "studio", "gamedev", "lua", "luau"],
+  "license": "MIT",
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "user_config": {
+    "bridge_url": {
+      "type": "string",
+      "title": "URL do bridge",
+      "description": "Ex: https://seu-bridge.onrender.com (sem / no fim)",
+      "required": true
+    },
+    "token": {
+      "type": "string",
+      "title": "Token da sessão",
+      "description": "Crie com: rblx-mcp session --bridge <URL>",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}
