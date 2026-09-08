@@ -1,6 +1,6 @@
 {
   "name": "rblx-mcp",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "MCP remoto p/ Roblox Studio: CLI de IA -> Site (MCP+bridge) -> Redis -> Plugin Studio",
   "bin": {

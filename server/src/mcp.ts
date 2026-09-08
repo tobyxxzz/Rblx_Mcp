@@ -246,7 +246,7 @@ function pickSession(args: Record<string, unknown> | undefined, fallback: string
 
 export function createMcpServer(defaultStudioSession: string) {
   const server = new Server(
-    { name: "rblx-mcp-bridge", version: "0.2.0" },
+    { name: "rblx-mcp-bridge", version: "0.2.1" },
     { capabilities: { tools: {} } }
   );
 

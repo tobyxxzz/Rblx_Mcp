@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // rblx-mcp — instala e configura o Rblx MCP em segundos. Zero dependências.
 // Uso:
-//   npm i -g https://github.com/tobyxxzz/Rblx_Mcp/releases/download/v0.2.0/rblx-mcp-0.2.0.tgz
+//   npm i -g https://github.com/tobyxxzz/Rblx_Mcp/releases/download/v0.2.1/rblx-mcp-0.2.1.tgz
 //   rblx-mcp init        → guia bridge + sessão + configura Claude/OpenCode/Desktop
 //   rblx-mcp session     → cria sessão nova (retorna token)
 //   rblx-mcp doctor      → testa bridge, auth e Studios conectados
@@ -301,7 +301,7 @@ function help() {
   console.log(`rblx-mcp — instala e configura o Rblx MCP
 
 Instalação (1 comando):
-  npm i -g https://github.com/tobyxxzz/Rblx_Mcp/releases/download/v0.2.0/rblx-mcp-0.2.0.tgz
+  npm i -g https://github.com/tobyxxzz/Rblx_Mcp/releases/download/v0.2.1/rblx-mcp-0.2.1.tgz
 
 Comandos:
   init [--bridge URL] [--token T] [--scope local|project|user] [--no-claude]
