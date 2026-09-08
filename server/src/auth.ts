@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import type { Request, Response, NextFunction } from "express";
-import { getRedis, keys } from "./redis.js";
+import { getRedis, keys } from "./store.js";
 import { hashToken, envBool, envInt, setAdvancedMode } from "./security.js";
 
 export interface AuthedRequest extends Request {

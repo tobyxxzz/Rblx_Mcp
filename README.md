@@ -77,11 +77,22 @@ Cada CLI tem seu sistema próprio — o `rblx-mcp init` acima só automatiza est
    `POST /api/commands/result { id, ok, data }`.
 6. **Resposta:** o servidor desbloqueia e devolve o resultado à IA via MCP.
 
-## Rodar local
+## Rodar local (recomendado: sem Redis, sem Render)
+
+```powershell
+npm i -g github:tobyxxzz/Rblx_Mcp
+rblx-mcp bridge            # sobe o bridge em http://localhost:3000 (backend memory)
+```
+
+Em outro terminal, `rblx-mcp init --bridge http://127.0.0.1:3000` e siga o
+guia. O `bridge` instala as dependências e compila sozinho na primeira vez
+(`--port` muda a porta; `--redis <url>` força o backend Redis).
+
+## Rodar remoto (Render + Redis)
 
 ```powershell
 docker compose up -d        # sobe o Redis
-copy .env.example .env
+copy .env.example .env      # defina STORE=redis + REDIS_URL
 npm install
 npm run dev                 # bridge em http://localhost:3000
 ```

@@ -6,7 +6,7 @@
   "bin": {
     "rblx-mcp": "cli/bin/rblx-mcp.js"
   },
-  "files": ["cli/", "plugin/", "examples/", "README.md", ".env.example"],
+  "files": ["cli/", "plugin/", "examples/", "server/", "README.md", ".env.example"],
   "scripts": {
     "dev": "npm --prefix server run dev",
     "build": "npm --prefix server run build",

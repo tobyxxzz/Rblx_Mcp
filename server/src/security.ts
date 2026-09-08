@@ -4,7 +4,7 @@ import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import type { Express } from "express";
 import type { AuthedRequest } from "./auth.js";
-import { getRedis } from "./redis.js";
+import { getRedis } from "./store.js";
 
 export function envStr(name: string, fallback: string): string {
   const v = process.env[name];

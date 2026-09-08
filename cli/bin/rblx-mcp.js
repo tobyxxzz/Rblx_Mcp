@@ -12,7 +12,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const os = require("node:os");
 const readline = require("node:readline/promises");
-const { execSync } = require("node:child_process");
+const { execSync, spawnSync } = require("node:child_process");
 
 // Troque pelo seu repo após subir no GitHub (ou use --repo / RBLX_MCP_REPO).
 const DEFAULT_REPO = process.env.RBLX_MCP_REPO || "tobyxxzz/Rblx_Mcp";
@@ -219,9 +219,40 @@ async function cmdInit(f) {
   if (process.platform === "win32") console.log(`  setx RBLX_MCP_TOKEN "${token}"   (abra novo terminal depois)`);
   else console.log(`  export RBLX_MCP_TOKEN="${token}"   (adicione ao ~/.bashrc ou ~/.zshrc p/ persistir)`);
   console.log("\nPróximos passos:");
+  if (/127\.0\.0\.1|localhost/.test(bridge)) {
+    console.log("  0. rblx-mcp bridge     → sobe o bridge local (outro terminal, deixe rodando)");
+  }
   console.log("  1. rblx-mcp plugin     → instala o plugin no Studio");
   console.log("  2. Cole o token acima no plugin e clique Connect");
   console.log("  3. rblx-mcp doctor     → confere se está tudo online");
+}
+
+async function cmdBridge(f) {
+  // Sobe o bridge no próprio PC (modo local, sem Redis/Render).
+  const port = String(f.port || process.env.PORT || "3000");
+  const serverDir = path.resolve(__dirname, "..", "..", "server");
+  if (!fs.existsSync(path.join(serverDir, "package.json"))) {
+    throw new Error(`server/ não encontrado em ${serverDir} — reinstale com: npm i -g github:${DEFAULT_REPO}`);
+  }
+  const env = { ...process.env, PORT: port };
+  if (f.redis) env.REDIS_URL = String(f.redis);
+  if (f.store) env.STORE = String(f.store);
+  if (!fs.existsSync(path.join(serverDir, "node_modules"))) {
+    console.log("Instalando dependências do bridge (só na primeira vez)...");
+    execSync(`npm --prefix "${serverDir}" install --no-audit --no-fund`, { stdio: "inherit" });
+  }
+  if (!fs.existsSync(path.join(serverDir, "dist", "index.js"))) {
+    console.log("Compilando o bridge...");
+    execSync(`npm --prefix "${serverDir}" run build`, { stdio: "inherit" });
+  }
+  const backend = env.STORE || (env.REDIS_URL ? "redis (REDIS_URL)" : "memory (local)");
+  console.log(`Bridge em http://127.0.0.1:${port} — backend: ${backend}. Ctrl+C para parar.`);
+  const r = spawnSync(process.execPath, [path.join(serverDir, "dist", "index.js")], {
+    stdio: "inherit",
+    env,
+  });
+  if (r.error) throw r.error;
+  process.exitCode = r.status ?? 0;
 }
 
 async function cmdDoctor(f) {
@@ -275,6 +306,8 @@ Instalação (1 comando):
 Comandos:
   init [--bridge URL] [--token T] [--scope local|project|user] [--no-claude]
       Guia interativo: cria sessão e configura OpenCode + Claude Code/Desktop
+  bridge [--port 3000] [--store memory|redis] [--redis URL]
+      Sobe o bridge no próprio PC (modo local, sem Render/Redis)
   session [--bridge URL] [--advanced]
       Só cria uma sessão e mostra o token
   doctor [--bridge URL] [--token T]
@@ -285,7 +318,9 @@ Comandos:
       Esta ajuda
 
 Exemplos:
-  rblx-mcp init --bridge https://rblxmcp.onrender.com
+  rblx-mcp bridge                        (bridge local em http://127.0.0.1:3000)
+  rblx-mcp init --bridge http://127.0.0.1:3000
+  rblx-mcp init --bridge https://rblxmcp.onrender.com   (modo remoto)
   rblx-mcp doctor
 `);
 }
@@ -296,6 +331,7 @@ Exemplos:
   const f = flags(rest);
   try {
     if (cmd === "init") await cmdInit(f);
+    else if (cmd === "bridge") await cmdBridge(f);
     else if (cmd === "session") await cmdSession(f);
     else if (cmd === "doctor") await cmdDoctor(f);
     else if (cmd === "plugin") await cmdPlugin(f);

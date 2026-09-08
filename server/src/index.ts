@@ -3,6 +3,7 @@ import express from "express";
 import { createSession, requireAuth, type AuthedRequest } from "./auth.js";
 import { enqueueAndWait, dequeueForPlugin, completeCommand, getAudit, recordPresence, listPresence } from "./queue.js";
 import { setupMcpRoutes } from "./mcp.js";
+import { backendName } from "./store.js";
 import { setupSecurity, apiLimiter, authLimiter, mcpMsgLimiter, setAdvancedMode, isAdvancedMode, envBool } from "./security.js";
 
 const app = express();
@@ -96,6 +97,6 @@ setupMcpRoutes(app, mcpMsgLimiter);
 
 const port = Number(process.env.PORT ?? 3000);
 app.listen(port, () => {
-  console.log(`[rblx-mcp] bridge online em http://localhost:${port}`);
+  console.log(`[rblx-mcp] bridge online em http://localhost:${port} (backend: ${backendName()})`);
   console.log(`[rblx-mcp] MCP SSE em http://localhost:${port}/mcp/sse`);
 });

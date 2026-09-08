@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { getRedis, keys } from "./redis.js";
+import { getRedis, keys } from "./store.js";
 import { assertPayloadAllowed, envInt } from "./security.js";
 
 export interface StudioCommand {

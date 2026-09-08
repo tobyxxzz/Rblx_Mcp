@@ -9,6 +9,7 @@ import {
 import { enqueueAndWait } from "./queue.js";
 import { listPresence } from "./queue.js";
 import { isAdvancedMode, envBool } from "./security.js";
+import { backendName } from "./store.js";
 import { requireAuth, type AuthedRequest } from "./auth.js";
 
 // Liga transport.sessionId (MCP) -> studio session (plugin A/B)
@@ -415,9 +416,10 @@ export function createMcpServer(defaultStudioSession: string) {
 // GET /mcp/sse (auth via Bearer) + POST /mcp/messages (auth + vinculo com a sessao dona)
 export function setupMcpRoutes(app: Express, msgLimiter: RequestHandler) {
   const transports = new Map<string, SSEServerTransport>();
-  // Transportes em memoria: rode UMA instancia (escala vertical, nao horizontal).
+  // Transportes em memória: rode UMA instância (escala vertical, não horizontal).
   // Num segundo processo, o POST cai noutro mapa e responde 404 sempre.
-  if (!process.env.SINGLE_INSTANCE_OK) {
+  // No backend memory (bridge local) isso não se aplica: é 1 processo por definição.
+  if (backendName() === "redis" && !process.env.SINGLE_INSTANCE_OK) {
     console.warn("[rblx-mcp] SSE em memoria - use 1 instancia (sem autoscale/replicas)");
   }
 
