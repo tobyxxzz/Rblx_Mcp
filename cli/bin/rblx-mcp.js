@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // rblx-mcp — instala e configura o Rblx MCP em segundos. Zero dependências.
 // Uso:
-//   npm i -g github:tobyxxzz/Rblx_Mcp
+//   npm i -g https://github.com/tobyxxzz/Rblx_Mcp/releases/download/v0.2.0/rblx-mcp-0.2.0.tgz
 //   rblx-mcp init        → guia bridge + sessão + configura Claude/OpenCode/Desktop
 //   rblx-mcp session     → cria sessão nova (retorna token)
 //   rblx-mcp doctor      → testa bridge, auth e Studios conectados
@@ -232,7 +232,7 @@ async function cmdBridge(f) {
   const port = String(f.port || process.env.PORT || "3000");
   const serverDir = path.resolve(__dirname, "..", "..", "server");
   if (!fs.existsSync(path.join(serverDir, "package.json"))) {
-    throw new Error(`server/ não encontrado em ${serverDir} — reinstale com: npm i -g github:${DEFAULT_REPO}`);
+    throw new Error(`server/ não encontrado em ${serverDir} — reinstale o pacote rblx-mcp`);
   }
   const env = { ...process.env, PORT: port };
   if (f.redis) env.REDIS_URL = String(f.redis);
@@ -301,7 +301,7 @@ function help() {
   console.log(`rblx-mcp — instala e configura o Rblx MCP
 
 Instalação (1 comando):
-  npm i -g github:tobyxxzz/Rblx_Mcp
+  npm i -g https://github.com/tobyxxzz/Rblx_Mcp/releases/download/v0.2.0/rblx-mcp-0.2.0.tgz
 
 Comandos:
   init [--bridge URL] [--token T] [--scope local|project|user] [--no-claude]

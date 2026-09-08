@@ -13,7 +13,7 @@ o caminho automático e o manual.
 ## Opção A — automática (recomendada)
 
 ```powershell
-npm i -g github:tobyxxzz/Rblx_Mcp
+npm i -g https://github.com/tobyxxzz/Rblx_Mcp/releases/download/v0.2.0/rblx-mcp-0.2.0.tgz
 rblx-mcp init --bridge https://rblxmcp.onrender.com
 ```
 

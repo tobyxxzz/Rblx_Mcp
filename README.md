@@ -26,7 +26,7 @@ Você fala ──► IA (Claude Code / OpenCode)
 Tudo no seu PC — sem conta, sem servidor, sem Redis:
 
 ```powershell
-npm i -g github:tobyxxzz/Rblx_Mcp
+npm i -g https://github.com/tobyxxzz/Rblx_Mcp/releases/download/v0.2.0/rblx-mcp-0.2.0.tgz
 rblx-mcp bridge
 ```
 

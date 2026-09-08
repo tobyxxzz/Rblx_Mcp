@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "rblx-mcp",
   "display_name": "Roblox Studio Bridge",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Controla o Roblox Studio pela IA: cria Parts e Scripts, lê propriedades e o Output.",
   "long_description": "Bridge entre assistentes de IA e o Roblox Studio. A IA lista Studios conectados, cria Parts/Scripts, altera propriedades e lê erros de runtime direto do Output — tudo por MCP. Requer o bridge no ar e um token de sessão (crie com `rblx-mcp session`).",
   "author": {
