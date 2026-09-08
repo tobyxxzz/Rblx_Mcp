@@ -1,0 +1,19 @@
+// Claude Code (CLI): registra o servidor MCP remoto.
+// Troque URL + TOKEN pelos do seu deploy.
+// Cada usuário/sessão usa um token diferente (Usuário A / Usuário B do diagrama).
+
+// Opção 1 — via comando:
+// claude mcp add --transport sse roblox-bridge http://127.0.0.1:3000/mcp/sse --header "Authorization: Bearer SEU_TOKEN_DE_SESSAO"
+
+// Opção 2 — via .mcp.json no projeto:
+{
+  "mcpServers": {
+    "roblox-bridge": {
+      "type": "sse",
+      "url": "http://127.0.0.1:3000/mcp/sse",
+      "headers": {
+        "Authorization": "Bearer SEU_TOKEN_DE_SESSAO"
+      }
+    }
+  }
+}

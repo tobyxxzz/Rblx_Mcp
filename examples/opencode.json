@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "roblox-bridge": {
+      "type": "remote",
+      "url": "http://127.0.0.1:3000/mcp/sse",
+      "enabled": true,
+      "oauth": false,
+      "headers": {
+        "Authorization": "Bearer {env:RBLX_MCP_TOKEN}"
+      }
+    }
+  }
+}

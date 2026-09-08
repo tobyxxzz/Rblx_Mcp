@@ -1,0 +1,17 @@
+{
+  "name": "rblx-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MCP remoto p/ Roblox Studio: CLI de IA -> Site (MCP+bridge) -> Redis -> Plugin Studio",
+  "bin": {
+    "rblx-mcp": "cli/bin/rblx-mcp.js"
+  },
+  "files": ["cli/", "plugin/", "examples/", "README.md", ".env.example"],
+  "scripts": {
+    "dev": "npm --prefix server run dev",
+    "build": "npm --prefix server run build",
+    "start": "npm --prefix server run start",
+    "cli": "node cli/bin/rblx-mcp.js",
+    "build:mcpb": "node scripts/build-mcpb.js"
+  }
+}

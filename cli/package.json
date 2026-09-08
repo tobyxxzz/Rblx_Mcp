@@ -1,0 +1,13 @@
+{
+  "name": "rblx-mcp-cli",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CLI de instalação do Rblx MCP (zero dependências)",
+  "bin": {
+    "rblx-mcp": "bin/rblx-mcp.js"
+  },
+  "files": ["bin"],
+  "scripts": {
+    "test": "node bin/rblx-mcp.js help"
+  }
+}
