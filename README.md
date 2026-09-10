@@ -51,6 +51,8 @@ O que cada comando faz:
 ## Conectando o Studio
 
 1. Reinicie o Studio após o `rblx-mcp plugin` → aparece a toolbar **MCP Bridge**.
+   (Download manual: baixe `StudioMcpBridge.lua` na [página de releases](https://github.com/tobyxxzz/Rblx_Mcp/releases)
+   e salve em `%LOCALAPPDATA%\Roblox\Plugins\`.)
 2. Cole o token da sessão (mostrado pelo `init`) e clique em **Connect**.
 3. Volte na IA e peça: *"liste as sessões conectadas"* — seu lugar deve aparecer.
 4. Teste: *"crie uma Part azul chamada Teste no Workspace"*.
